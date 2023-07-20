@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1 id="demo0">Pause resume timeout example</h1>
+
+
+<button onclick="myPauseFunction()">PAUSE</button>
+<button onclick="myResumeFunction()">RESUME</button>
+
+<p id="demo1">Will fire in 5s if not paused</p>
+<p id="demo2">Will fire in 6s if not paused</p>
+<p id="demo3">Will fire in 7s if not paused or cleared</p>
+
+<br><br>
+<button onclick="myClearFunction()">CLEAR Timer 3</button>
+
+<script>
+
+// Array to hold all ticking SuperTimeouts
+const listOfAllTickingSuperTimers = [];
+
+// SuperTimeout class
+class SuperTimeout {
+  constructor(callback, delay) {
+    this.callback = callback;
+    this.delay = delay;
+    this.timerId = null;
+    this.startTime = null;
+    this.remainingTime = delay;
+    this.isAlreadyPaused = false;
+    this.isCompleted = false;
+
+    this.start();
+
+    // Automatically add the new SuperTimeout instance to the listOfAllTickingSuperTimers array
+    listOfAllTickingSuperTimers.push(this); // Enlist
+  }
+
+  start() {
+    this.startTime = Date.now();
+    this.timerId = setTimeout(() => {
+      this.isCompleted = true;
+      this.remainingTime = 0;
+      this.callback();
+      this.getLost(); // Get removed from the listOfAllTickingSuperTimers array
+    }, this.remainingTime);
+  }
+
+  pause() {
+    if (this.isAlreadyPaused || this.isCompleted) {
+      return; // Do nothing if already paused or completed
+    }
+
+    clearTimeout(this.timerId);
+    const elapsedTime = Date.now() - this.startTime;
+    this.remainingTime -= elapsedTime;
+    this.isAlreadyPaused = true;
+  }
+
+  resume() {
+    if (!this.isAlreadyPaused || this.isCompleted) {
+      return; // Do nothing if not paused or completed
+    }
+
+    this.startTime = Date.now();
+    this.timerId = setTimeout(() => {
+      this.isCompleted = true;
+      this.remainingTime = 0;
+      this.callback();
+      this.getLost(); // Get removed from the listOfAllTickingSuperTimers array
+    }, this.remainingTime);
+    this.isAlreadyPaused = false;
+  }
+
+  reset() {
+    clearTimeout(this.timerId);
+    this.startTime = null;
+    this.remainingTime = this.delay;
+    this.isAlreadyPaused = false;
+    this.isCompleted = false;
+  }
+
+  restart() {
+    this.reset();
+    this.start();
+    const index = listOfAllTickingSuperTimers.indexOf(this);
+    if (index == -1) {
+      listOfAllTickingSuperTimers.push(this); // Reenter the list if restart happens after clearance
+    }
+  }
+
+  getLost() { // Submit resignation, quit and leave
+    const index = listOfAllTickingSuperTimers.indexOf(this);
+    if (index !== -1) {
+      listOfAllTickingSuperTimers.splice(index, 1); // Remove self from the list
+    }
+  }
+
+  clear() {
+  	this.reset();
+    this.getLost();
+  }
+}
+
+// SuperInterval class
+class SuperInterval extends SuperTimeout {
+  constructor(callback, delay) {
+    super(callback, delay);
+  }
+  // Override start() method of SuperTimeout
+  start() {
+    this.startTime = Date.now();
+    this.timerId = setTimeout(() => {
+      this.isCompleted = true;
+      this.remainingTime = 0;
+      this.callback();
+      this.restart(); // Call restart to restart the timer
+    }, this.remainingTime);
+  }
+  // Override resume() method of SuperTimeout
+  resume() {
+    if (!this.isAlreadyPaused || this.isCompleted) {
+      return; // Do nothing if not paused or completed
+    }
+
+    this.startTime = Date.now();
+    this.timerId = setTimeout(() => {
+      this.isCompleted = true;
+      this.remainingTime = 0;
+      this.callback();
+      this.restart(); // Call restart to restart the timer
+    }, this.remainingTime);
+    this.isAlreadyPaused = false;
+  }
+}
+
+
+
+
+
+const display0 = document.getElementById("demo0");
+var a = 1; var b = 1; var c = 1;
+const display1 = document.getElementById("demo1");
+const display2 = document.getElementById("demo2");
+const display3 = document.getElementById("demo3");
+function myFunction1() {
+  display1.innerHTML = "Timer 1 complete »»» " + a;
+}
+function myFunction2() {
+  display2.innerHTML = "Timer 2 complete »»» " + b;
+}
+function myFunction3() {
+  display3.innerHTML = "Timer 3 complete »»» " + c;
+}
+
+
+
+// Create a new SuperTimeout (automatically added to listOfAllTickingSuperTimers)
+new SuperTimeout(myFunction1, 5000);
+new SuperTimeout(myFunction2, 6000);
+const markedTimeout = new SuperTimeout(myFunction3, 7000);
+// or a new SuperInterval
+
+
+function myPauseFunction() {
+	// Iterate through listOfAllTickingSuperTimers to pause all SuperTimers
+    for (const timer of listOfAllTickingSuperTimers) {
+      timer.pause();
+    }
+    if(listOfAllTickingSuperTimers.length == 0) {display0.innerHTML = "No timeouts to be paused";}
+    else if(listOfAllTickingSuperTimers.length == 1){display0.innerHTML = "There is " + listOfAllTickingSuperTimers.length + " timeout that is now paused";}
+    else {display0.innerHTML = "All " + listOfAllTickingSuperTimers.length + " timeouts are paused";}
+}
+function myResumeFunction() {
+	// Iterate through listOfAllTickingSuperTimers to pause all SuperTimers
+    for (const timer of listOfAllTickingSuperTimers) {
+      timer.resume();
+    }
+    if(listOfAllTickingSuperTimers.length == 0) {display0.innerHTML = "No timeouts to be unpaused";}
+    else if(listOfAllTickingSuperTimers.length == 1){display0.innerHTML = "There is " + listOfAllTickingSuperTimers.length + " timeout that is now unpaused";}
+    else {display0.innerHTML = "All " + listOfAllTickingSuperTimers.length + " timeouts are unpaused";}
+}
+function myClearFunction() {
+	if(!markedTimeout.isCompleted){
+    	markedTimeout.clear();
+    	display0.innerHTML = "Timer 3 will never fire";
+    }
+	else {display0.innerHTML = "Too late. Timer 3 already complete";}
+}
+
+</script>
+
+</body>
+</html>
