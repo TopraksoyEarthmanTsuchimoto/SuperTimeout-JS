@@ -29,7 +29,7 @@ function doSomething() {
   }
 }
 ```
-The chain of all timeouts and all intervals can easily be paused and unpaused by calling
+In this case the chain of all timeouts and all intervals can easily be paused and unpaused by calling
 * `pauseAllSuperTimers()`
 and
 * `unpauseAllSuperTimers()`
