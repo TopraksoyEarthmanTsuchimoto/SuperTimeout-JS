@@ -22,6 +22,7 @@ Imagine that you have to keep chaining the timeouts like
 function doSomething() {
   // ...
   console.log("First task complete!");  // Or maybe // alert("First task complete!");
+
   new SuperTimeout(doOneMoreThing, 5000);
 
   function doOneMoreThing() {
