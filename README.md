@@ -6,3 +6,9 @@ With this javascript library you can replace them with `SuperTimeout`s and `Supe
 ## Examples
 [See a demo of SuperTimeout, the pausable version of setTimeout](https://topraksoyearthmantsuchimoto.github.io/SuperTimeout-JS/)
 
+[See a demo of SuperInterval, the pausable version of setInterval](https://topraksoyearthmantsuchimoto.github.io/SuperTimeout-JS/index2.html)
+
+## Usage
+
+
+## Installation
