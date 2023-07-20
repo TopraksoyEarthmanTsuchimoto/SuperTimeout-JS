@@ -42,12 +42,12 @@ If you want to control individual timers, you must assign them to variables with
 ```
 const oneParticularTimer = new SuperTimeout(doSomething, 3000);
 ```
-as this will allow you to use methods on a dedicated timer, like
-`oneParticularTimer.pause(); // Pause the timer`
+as this will allow you to use methods on any given timer, like
+`oneParticularTimer.pause();`
 or
-`oneParticularTimer.resume(); // Resume the timer`
+`oneParticularTimer.resume();`
 or
-`oneParticularTimer.clear(); // Stop the timer`
+`oneParticularTimer.clear();`
 
 See the [source code](https://github.com/TopraksoyEarthmanTsuchimoto/SuperTimeout-JS/blob/main/supertimeout.js) for all available methods.
 
