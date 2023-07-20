@@ -121,13 +121,13 @@ class SuperInterval extends SuperTimeout {
 
 // Call these functions to PAUSE-UNPAUSE ALL SuperTimeout and SuperInterval instances
 function pauseAllSuperTimers() {
-	// Iterate through listOfAllTickingSuperTimers to pause all active SuperTimers
+    // Iterate through listOfAllTickingSuperTimers to pause all active SuperTimers
     for (const timer of listOfAllTickingSuperTimers) {
       timer.pause();
     }
 }
 function unpauseAllSuperTimers() {
-	// Iterate through listOfAllTickingSuperTimers to unpause all active SuperTimers
+    // Iterate through listOfAllTickingSuperTimers to unpause all active SuperTimers
     for (const timer of listOfAllTickingSuperTimers) {
       timer.resume();
     }
