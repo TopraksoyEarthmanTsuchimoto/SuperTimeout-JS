@@ -46,19 +46,15 @@ const markedTimeout = new SuperTimeout(myFunction3, 7000);
 
 
 function myPauseFunction() {
-	// Iterate through listOfAllTickingSuperTimers to pause all SuperTimers
-    for (const timer of listOfAllTickingSuperTimers) {
-      timer.pause();
-    }
+    // Iterates through listOfAllTickingSuperTimers to pause all SuperTimers
+    pauseAllSuperTimers();
     if(listOfAllTickingSuperTimers.length == 0) {display0.innerHTML = "No timeouts to be paused";}
     else if(listOfAllTickingSuperTimers.length == 1){display0.innerHTML = "There is " + listOfAllTickingSuperTimers.length + " timeout that is now paused";}
     else {display0.innerHTML = "All " + listOfAllTickingSuperTimers.length + " timeouts are paused";}
 }
 function myResumeFunction() {
-	// Iterate through listOfAllTickingSuperTimers to pause all SuperTimers
-    for (const timer of listOfAllTickingSuperTimers) {
-      timer.resume();
-    }
+    // Iterates through listOfAllTickingSuperTimers to unpause all SuperTimers
+    unpauseAllSuperTimers();
     if(listOfAllTickingSuperTimers.length == 0) {display0.innerHTML = "No timeouts to be unpaused";}
     else if(listOfAllTickingSuperTimers.length == 1){display0.innerHTML = "There is " + listOfAllTickingSuperTimers.length + " timeout that is now unpaused";}
     else {display0.innerHTML = "All " + listOfAllTickingSuperTimers.length + " timeouts are unpaused";}
