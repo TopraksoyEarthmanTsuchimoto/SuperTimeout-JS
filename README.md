@@ -23,6 +23,7 @@ function doSomething() {
   // ...
   console.log("First task complete!");  // Or maybe // alert("First task complete!");
   new SuperTimeout(doOneMoreThing, 5000);
+
   function doOneMoreThing() {
     // ...
     console.log("Second task complete!");  // Or maybe // alert("Second task complete!");
