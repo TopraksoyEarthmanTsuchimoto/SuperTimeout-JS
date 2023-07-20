@@ -165,7 +165,7 @@ const markedTimeout = new SuperTimeout(myFunction3, 7000);
 
 
 function myPauseFunction() {
-	// Iterate through listOfAllTickingSuperTimers to pause all SuperTimers
+    // Iterate through listOfAllTickingSuperTimers to pause all SuperTimers
     for (const timer of listOfAllTickingSuperTimers) {
       timer.pause();
     }
@@ -174,7 +174,7 @@ function myPauseFunction() {
     else {display0.innerHTML = "All " + listOfAllTickingSuperTimers.length + " timeouts are paused";}
 }
 function myResumeFunction() {
-	// Iterate through listOfAllTickingSuperTimers to pause all SuperTimers
+    // Iterate through listOfAllTickingSuperTimers to unpause all SuperTimers
     for (const timer of listOfAllTickingSuperTimers) {
       timer.resume();
     }
