@@ -1,2 +1,4 @@
 # SuperTimeout-JS
-For those who wish they could pause/unpause a setTimeout or a setInterval
+Ever wished you could pause and unpause the ticking of all `setTimeout`s and `setInterval`s in your app?
+With this javascript library you can replace them with `SuperTimeout`s and `SuperInterval`s and do just that.
+
