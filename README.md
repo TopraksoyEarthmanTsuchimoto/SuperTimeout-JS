@@ -52,9 +52,11 @@ or
 See the [source code](https://github.com/TopraksoyEarthmanTsuchimoto/SuperTimeout-JS/blob/main/supertimeout.js) for all available methods.
 
 ## Installation
-Either get `supertimeout.js` and include it in your HTML
+Either get `supertimeout.js` and include it in your HTML like,
 ```
 <script src="/the/path/to/supertimeout.js">/*Pausable timeouts and intervals*/</script>
 ```
-or use a CDN: jsdelivr
+or use a CDN like,
+
+https://cdn.jsdelivr.net/gh/TopraksoyEarthmanTsuchimoto/SuperTimeout-JS@main/supertimeout.js
 
