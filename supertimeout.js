@@ -2,7 +2,7 @@
 // supertimeout.js was created during the development of https://speakworldlanguages.app
 
 // Array to hold all ticking SuperTimeouts and SuperIntervals
-const listOfAllTickingSuperTimers = [];
+var listOfAllTickingSuperTimers = [];
 
 // SuperTimeout class
 class SuperTimeout {
