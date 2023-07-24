@@ -19,6 +19,7 @@ new SuperInterval(doSomething, 3000);
 ```
 Imagine that you have to keep chaining the timeouts like,
 ```
+new SuperTimeout(doSomething, 3000);
 function doSomething() {
   // ...
   console.log("First task complete!");  // Or maybe // alert("First task complete!");
