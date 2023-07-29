@@ -4,9 +4,9 @@ Ever wished you could pause and unpause the ticking of all `setTimeout`s and `se
 With this javascript library you can replace them with `SuperTimeout`s and `SuperInterval`s and do just that.
 
 ## Examples
-[See a demo of SuperTimeout, the pausable version of setTimeout](https://topraksoyearthmantsuchimoto.github.io/SuperTimeout-JS/index3.html)
+[See a demo of SuperTimeout, the pausable version of setTimeout](https://topraksoyearthmantsuchimoto.github.io/SuperTimeout-JS/index3.html) (See index3.html)
 
-[See a demo of SuperInterval, the pausable version of setInterval](https://topraksoyearthmantsuchimoto.github.io/SuperTimeout-JS/index2.html)
+[See a demo of SuperInterval, the pausable version of setInterval](https://topraksoyearthmantsuchimoto.github.io/SuperTimeout-JS/index2.html) (See index2.html)
 
 ## Usage
 Creating a SuperTimeout is very similar to creating a setTimeout. Just don't forget to start with the keyword « new ».
