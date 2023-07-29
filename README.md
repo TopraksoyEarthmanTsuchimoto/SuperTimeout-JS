@@ -51,7 +51,11 @@ or
 `oneParticularTimer.clear();`
 
 See the [source code](https://github.com/TopraksoyEarthmanTsuchimoto/SuperTimeout-JS/blob/main/supertimeout.js) for all available methods.
-
+#### About clearing timeouts and intervals
+The `.clear()` method works both with `SuperTimeout` and `SuperInterval` timers.
+What you must be careful about is,
+* `clearTimeout(myTimeout)` and `clearInterval(myInterval)` _do not throw any errors_ if `myTimeout` or `myInterval` is `undefined`,
+* `myTimeout.clear()` or `myInterval.clear()` _will throw an error_ if `myTimeout` or `myInterval` is `undefined`.
 ## Installation
 Either get `supertimeout.js` and include it in your HTML like,
 ```
