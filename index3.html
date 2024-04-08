@@ -10,9 +10,9 @@
 <button onclick="myPauseFunction()">PAUSE</button>
 <button onclick="myResumeFunction()">RESUME</button>
 
-<p id="demo1">Will fire in 5s if not paused</p>
-<p id="demo2">Will fire in 6s if not paused</p>
-<p id="demo3">Will fire in 7s if not paused or cleared</p>
+<p id="demo1">This will fire in 5s if not paused</p>
+<p id="demo2">This will fire in 6s if not paused</p>
+<p id="demo3">This will fire in 7s if not paused or cleared</p>
 
 <br><br>
 <button onclick="myClearFunction()">CLEAR Timer #3</button>
@@ -62,9 +62,9 @@ function myResumeFunction() {
 function myClearFunction() {
 	if(!markedTimeout.isCompleted){
     	markedTimeout.clear();
-    	display0.innerHTML = "Timer 3 will never fire";
+    	display0.innerHTML = "Timer #3 will never fire";
     }
-	else {display0.innerHTML = "Too late. Timer 3 already complete.";}
+	else {display0.innerHTML = "Too late. Timer #3 already complete.";}
 }
 
 </script>
