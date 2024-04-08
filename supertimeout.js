@@ -1,4 +1,4 @@
-// supertimeout.js is released to the public domain
+// supertimeout.js is released to the public domain as a courtesy of Manheart Earthman
 // supertimeout.js was created during the development of https://speakworldlanguages.app
 
 // Array to hold all ticking SuperTimeouts and SuperIntervals
@@ -17,7 +17,7 @@ class SuperTimeout {
 
     this.start();
 
-    // Automatically add the new SuperTimeout instance to the listOfAllTickingSuperTimers array
+    // Add the new SuperTimeout instance to the listOfAllTickingSuperTimers array
     listOfAllTickingSuperTimers.push(this); // Enlist
   }
 
