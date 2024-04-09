@@ -13,8 +13,9 @@
 <p id="demo1">This interval will fire every 4.1s</p>
 <p id="demo2">This interval will fire every 4.2s</p>
 <p id="demo3">This interval will fire every 4.3s</p>
+<h4 id="demo4"> </h4>
 
-<br><br>
+<br>
 <button onclick="myClearFunction()">STOP Timer #3</button>
 <br><br>
 <button onclick="myRestartFunction()">RESTART Timer #3</button>
@@ -26,6 +27,7 @@ var a = 1; var b = 1; var c = 1;
 const display1 = document.getElementById("demo1");
 const display2 = document.getElementById("demo2");
 const display3 = document.getElementById("demo3");
+const display4 = document.getElementById("demo4");
 function myFunction1() {
   display1.innerHTML = "Timer 1 - lap »»» " + a; a++;
 }
@@ -45,19 +47,23 @@ const timerThree = new SuperInterval(myFunction3, 4300);
 function myPauseFunction() {
     pauseAllSuperTimers();
     display0.innerHTML = "Now " + listOfAllTickingSuperTimers.length + " intervals are paused";
+    display4.innerHTML = "Remaining time for the next tick of timer #3 was " + timerThree.remainingTime + "ms";
 }
 function myResumeFunction() {
     unpauseAllSuperTimers();
     display0.innerHTML = "Now " + listOfAllTickingSuperTimers.length + " intervals are unpaused";
+    display4.innerHTML = " ";
 }
 function myClearFunction() {
 	timerThree.clear();
 	display0.innerHTML = "Timer #3 stopped ticking";
+	display4.innerHTML = " ";
 }
 function myRestartFunction() {
 	timerThree.restart();
 	display0.innerHTML = "Timer #3 has started ticking";
 	display3.innerHTML = "Timer 3 - lap »»» " + 0; c = 1;
+	display4.innerHTML = " ";
 }
 
 
