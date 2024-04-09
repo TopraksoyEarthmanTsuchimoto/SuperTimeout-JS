@@ -43,18 +43,10 @@ new SuperInterval(myFunction2, 4200);
 const timerThree = new SuperInterval(myFunction3, 4300);
 
 function myPauseFunction() {
-    // Iterate through listOfAllTickingSuperTimers to pause all SuperTimers
-    /*for (const timer of listOfAllTickingSuperTimers) {
-      timer.pause();
-    }*/
     pauseAllSuperTimers();
     display0.innerHTML = "Now " + listOfAllTickingSuperTimers.length + " intervals are paused";
 }
 function myResumeFunction() {
-    // Iterate through listOfAllTickingSuperTimers to pause all SuperTimers
-    /*for (const timer of listOfAllTickingSuperTimers) {
-      timer.resume();
-    }*/
     unpauseAllSuperTimers();
     display0.innerHTML = "Now " + listOfAllTickingSuperTimers.length + " intervals are unpaused";
 }
