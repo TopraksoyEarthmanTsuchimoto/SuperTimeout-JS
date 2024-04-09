@@ -1,7 +1,11 @@
-// supertimeout.js is released to the public domain as a courtesy of Manheart Earthman
+// SuperTimeout and SuperInterval
+// version : 1.0
+// author  : Manheart Earthman a.k.a. B. A. Bilgekılınç Topraksoy a.k.a 土本 智一勇夫剛志
+// license : Good People's License BY-SA
 // supertimeout.js was created during the development of https://speakworldlanguages.app
 
 "use strict";
+
 // Array to hold all ticking SuperTimeouts and SuperIntervals
 var listOfAllTickingSuperTimers = [];
 
@@ -52,8 +56,8 @@ class SuperTimeout {
   }
 
   // Pause if it is OK to pause
-  pause() { top.console.log("pause() method of SuperTimeout fired while this.timeoutID = " + this.timeoutID);
-    if (this.isPaused || !this.timeoutID) { top.console.log("Cannot pause the SuperTimeout because \n this.isPaused = " + this.isPaused + " OR !this.timeoutID = " + (!this.timeoutID));
+  pause() { // DEBUG top.console.log("pause() method of SuperTimeout fired while this.timeoutID = " + this.timeoutID);
+    if (this.isPaused || !this.timeoutID) { // DEBUG top.console.log("Cannot pause the SuperTimeout because this.isPaused = " + this.isPaused + " OR !this.timeoutID = " + (!this.timeoutID));
       return; // Do nothing if is already paused or if has completed or is reset
     }
 
@@ -73,7 +77,7 @@ class SuperTimeout {
   }
 
   // Reset the timeout
-  _reset() { top.console.log("_reset() fired in parent");
+  _reset() { // DEBUG top.console.log("_reset() fired in parent");
     if (this.timeoutID) {
       clearTimeout(this.timeoutID);
       this.timeoutID = null; // Indicates that the timer has completed or is reset
@@ -106,7 +110,7 @@ class SuperTimeout {
   }
 
   // Restart the timeout
-  restart() { top.console.log("restarting...");
+  restart() { // DEBUG top.console.log("restarting...");
     this._reset();
     this._start();
 
@@ -126,7 +130,7 @@ class SuperTimeout {
     }
   }
 
-  clear() { top.console.log("clearing... » fired by parent");
+  clear() { // DEBUG top.console.log("clearing... » fired by parent method");
   	this._reset();
     this._getLost();
   }
@@ -138,7 +142,7 @@ class SuperTimeout {
 class SuperInterval extends SuperTimeout {
   // NOTE: Had we not added anything to the constructor, we could omit it » https://javascript.info/class-inheritance#overriding-constructor
   constructor(callback, delay) {
-    // this.intervalID = null; // OH MY GOODNESS: This line causes error if it comes before super() and it causes another error if it comes after super()
+    // PHEW: this.intervalID = null; // WHAT A BUG: This line causes error if it comes before super() and it causes another error if it comes after super()
     // What happens if it comes before super() » https://javascript.info/class-inheritance#overriding-constructor
     // What happens if it comes after super() » It missets the value of this.intervalID to null right after it is given a value like 1,2,3 inside the overrider _set() below
     // Solution: Relocate it to the parent even if it is never used there! REMEMBER: It must execute before the _start() method in parent, NOT AFTER!
@@ -159,7 +163,7 @@ class SuperInterval extends SuperTimeout {
 
   // OVERRIDE THE PARENT: Method to create a setInterval
   _set() { // This method better be private
-    top.console.log("Overrider _set method of SuperInterval fired. Will now set the interval");
+    // DEBUG top.console.log("Overrider _set method of SuperInterval fired. Will now set the interval");
     // CAUTION: Do not use classical function declarations inside setTimeouts and setIntervals when working with classes » It breaks the usage of the «this» keyword. Use arrow functions instead.
     this.intervalID = setInterval(() => { // DEBUG top.console.log("TICK HAPPENED and before callback this.intervalID = " + this.intervalID);
       this.callback(); // Execute the callback function
@@ -172,25 +176,28 @@ class SuperInterval extends SuperTimeout {
   }
 
   // OVERRIDE THE PARENT: Pause if it is OK to pause
-  pause() { top.console.log("Overrider pause method of SuperInterval fired. " + "Now this.intervalID = " + this.intervalID);
-    if (this.isPaused || !this.intervalID) { top.console.log("Cannot pause because this.isPaused = " + this.isPaused + " OR " + " !this.intervalID = " + (!this.intervalID));
+  pause() { // DEBUG top.console.log("Overrider pause method of SuperInterval fired. " + "Now this.intervalID = " + this.intervalID);
+    if (this.isPaused || !this.intervalID) { // DEBUG top.console.log("Cannot pause because this.isPaused = " + this.isPaused + " OR " + " !this.intervalID = " + (!this.intervalID));
       return; // Do nothing if is already paused or is reset
     }
     if (this.timeoutID) {
-      top.console.log("This must be at least the 2nd pause. Before clearing the timeout: this.timeoutID = " + this.timeoutID);
+      // DEBUG top.console.log("This must be at least the 2nd pause. Before clearing the timeout: this.timeoutID = " + this.timeoutID);
       clearTimeout(this.timeoutID);
-      top.console.log("After clearing the timeout: this.timeoutID = " + this.timeoutID);
-    } // In case was paused and unpaused
-    if (this.intervalID) { clearInterval(this.intervalID); top.console.log("interval is cleared and now this.intervalID = " + this.intervalID); } // In case has never been paused before
+      // DEBUG top.console.log("After clearing the timeout: this.timeoutID = " + this.timeoutID);
+    } // In case was paused and unpaused then repaused
+    if (this.intervalID) {
+      clearInterval(this.intervalID);
+      // DEBUG top.console.log("interval is cleared and now this.intervalID = " + this.intervalID);
+    } // In case has never been paused before
 
     const elapsedTime = Date.now() - this.startTime; // Calculate how much time has passed since start (t=0) or the last TICK
-    this.remainingTime -= elapsedTime; top.console.log("When paused remaining time was = " + this.remainingTime);
+    this.remainingTime -= elapsedTime; // DEBUG top.console.log("When paused remaining time for the next tick was = " + this.remainingTime);
     this.isPaused = true;
   }
 
   // OVERRIDE THE PARENT: Unpause if was paused
-  resume() { top.console.log("Overrider resume() fired!");
-    if (!this.isPaused || !this.intervalID) { top.console.log("Cannot resume");
+  resume() { // DEBUG top.console.log("Overrider resume() fired!");
+    if (!this.isPaused || !this.intervalID) { // DEBUG top.console.log("Cannot resume because !this.isPaused = " + (!this.isPaused) + " OR " + " !this.intervalID = " + (!this.intervalID));
       return; // Do nothing if is not paused or is reset
     }
     // CAUTION: Do not use classical function declarations inside setTimeouts and setIntervals when working with classes » It breaks the usage of the «this» keyword. Use arrow functions instead.
@@ -207,7 +214,7 @@ class SuperInterval extends SuperTimeout {
   }
 
   // super magic
-  _reset() { top.console.log("Overrider _reset() fired!");
+  _reset() { // DEBUG top.console.log("Overrider _reset() fired!");
     super._reset(); // Perform the same resetting procedure in SuperTimeout
     if (this.intervalID) { // With the addition of the task of removing the interval
       clearInterval(this.intervalID);
