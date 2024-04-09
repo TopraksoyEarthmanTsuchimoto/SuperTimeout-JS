@@ -1,6 +1,7 @@
 // supertimeout.js is released to the public domain as a courtesy of Manheart Earthman
 // supertimeout.js was created during the development of https://speakworldlanguages.app
 
+"use strict";
 // Array to hold all ticking SuperTimeouts and SuperIntervals
 var listOfAllTickingSuperTimers = [];
 
@@ -159,16 +160,16 @@ class SuperInterval extends SuperTimeout {
   // OVERRIDE THE PARENT: Method to create a setInterval
   _set() { // This method better be private
     top.console.log("Overrider _set method of SuperInterval fired. Will now set the interval");
-    this.intervalID = setInterval(() => { top.console.log("TICK HAPPENED and before callback this.intervalID = " + this.intervalID);
+    this.intervalID = setInterval(() => { // DEBUG top.console.log("TICK HAPPENED and before callback this.intervalID = " + this.intervalID);
       this.callback(); // Execute the callback function
       this.startTime = Date.now(); // Take note when the interval REstarted i.e. TICKED
-       top.console.log("TICK HAPPENED and after callback this.intervalID = " + this.intervalID);
+      // DEBUG top.console.log("TICK HAPPENED and after callback this.intervalID = " + this.intervalID);
     }, this.delay);
 
     this.startTime = Date.now(); // Take note when the interval first started
     this.isPaused = false;
 
-    top.console.log("And now this.intervalID = " + this.intervalID);
+    // DEBUG top.console.log("And now this.intervalID = " + this.intervalID);
   }
 
   // OVERRIDE THE PARENT: Pause if it is OK to pause
@@ -189,7 +190,7 @@ class SuperInterval extends SuperTimeout {
   }
 
   // OVERRIDE THE PARENT: Unpause if was paused
-  resume() {
+  resume() { top.console.log("Overrider resume() fired!");
     if (!this.isPaused || !this.intervalID) {
       return; // Do nothing if is not paused or is reset
     }
@@ -207,7 +208,7 @@ class SuperInterval extends SuperTimeout {
   }
 
   // super magic
-  _reset() { top.console.log("Overrider reset fired!");
+  _reset() { top.console.log("Overrider _reset() fired!");
     super._reset(); // Perform the same resetting procedure in SuperTimeout
     if (this.intervalID) { // With the addition of the task of removing the interval
       clearInterval(this.intervalID);
