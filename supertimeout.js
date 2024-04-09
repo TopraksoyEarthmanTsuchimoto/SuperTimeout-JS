@@ -50,8 +50,8 @@ class SuperTimeout {
   }
 
   // Pause if it is OK to pause
-  pause() {
-    if (this.isPaused || !this.timeoutID) {
+  pause() { top.console.log("pause() method of SuperTimeout fired while this.timeoutID = " + this.timeoutID);
+    if (this.isPaused || !this.timeoutID) { top.console.log("Cannot pause the SuperTimeout because \n this.isPaused = " + this.isPaused + " OR !this.timeoutID = " + (!this.timeoutID));
       return; // Do nothing if is already paused or if has completed or is reset
     }
 
@@ -137,7 +137,7 @@ class SuperInterval extends SuperTimeout {
   // NOTE: Had we not added anything to the constructor, we could omit it » https://javascript.info/class-inheritance#overriding-constructor
   constructor(callback, delay) {
     super(callback, delay); // Note that: This would invoke the parent _start() if the local _start() didn't exist
-    // Note that enlisting in listOfAllTickingSuperTimers is done via super as soon as a new SuperInterval is created
+    // Note that enlisting in listOfAllTickingSuperTimers is done via parent constructor using super() as soon as a new SuperInterval is created
     this.intervalID = null;
   }
 
@@ -154,6 +154,7 @@ class SuperInterval extends SuperTimeout {
 
   // OVERRIDE THE PARENT: Method to create a setInterval
   _set() { // This method better be private
+    top.console.log("Overrider _set method of SuperInterval fired. Will now set the interval");
     this.intervalID = setInterval(() => {
       this.callback(); // Execute the callback function
       this.startTime = Date.now(); // Take note when the interval REstarted i.e. TICKED
@@ -161,11 +162,13 @@ class SuperInterval extends SuperTimeout {
 
     this.startTime = Date.now(); // Take note when the interval first started
     this.isPaused = false;
+
+    top.console.log("And now this.intervalID = " + this.intervalID);
   }
 
   // Pause if it is OK to pause
-  pause() { top.console.log("Overridden pause method of SuperInterval fired");
-    if (this.isPaused || !this.intervalID) { top.console.log("Cannot pause because this.isPaused = " + this.isPaused + " and " + " !this.intervalID = " + (!this.intervalID));
+  pause() { top.console.log("Overrider pause method of SuperInterval fired");
+    if (this.isPaused || !this.intervalID) { top.console.log("Cannot pause because this.isPaused = " + this.isPaused + " OR " + " !this.intervalID = " + (!this.intervalID));
       return; // Do nothing if is already paused or is reset
     }
     if (this.timeoutID) { clearTimeout(this.timeoutID); } // In case was paused and unpaused
