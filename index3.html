@@ -39,8 +39,8 @@ function myFunction3() {
 
 
 // Create a new SuperTimeout (automatically added to listOfAllTickingSuperTimers)
-new SuperTimeout(myFunction1, 5000);
-new SuperTimeout(myFunction2, 6000);
+new SuperTimeout(myFunction1, 5000); // Unnamed
+new SuperTimeout(myFunction2, 6000); // Unnamed
 const markedTimeout = new SuperTimeout(myFunction3, 7000);
 // or a new SuperInterval
 
@@ -60,7 +60,7 @@ function myResumeFunction() {
     else {display0.innerHTML = "All " + listOfAllTickingSuperTimers.length + " timeouts are unpaused";}
 }
 function myClearFunction() {
-	if(!markedTimeout.isCompleted){
+	if(!markedTimeout.remainingTime != 0){
     	markedTimeout.clear();
     	display0.innerHTML = "Timer #3 will never fire";
     }
