@@ -17,22 +17,23 @@ Note the same resemblance between SuperInterval and setInterval.
 ```
 new SuperInterval(doSomething, 3000);
 ```
-Imagine that you have to keep chaining the timeouts like,
+If you just had to keep chaining the timeouts like,
 ```
 new SuperTimeout(doSomething, 3000);
 function doSomething() {
-  // ...
-  console.log("First task complete!");  // Or maybe // alert("First task complete!");
-
+  console.log("First task complete!");
   new SuperTimeout(doOneMoreThing, 5000);
-
-  function doOneMoreThing() {
-    // ...
-    console.log("Second task complete!");  // Or maybe // alert("Second task complete!");
-  }
+}
+function doOneMoreThing() {
+  console.log("Second task complete!");
+  new SuperTimeout(doTheNextOtherThing, 5000);
+}
+function doTheNextOtherThing() {
+  console.log("Third task complete!");
+  // You get the idea...
 }
 ```
-In this case the chain of all timeouts and all intervals can easily be paused and unpaused by calling
+You could pause the chain of all timeouts and all intervals easily and unpause as well by calling
 * `pauseAllSuperTimers()`
 and
 * `unpauseAllSuperTimers()`
