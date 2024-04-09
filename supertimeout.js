@@ -155,9 +155,10 @@ class SuperInterval extends SuperTimeout {
   // OVERRIDE THE PARENT: Method to create a setInterval
   _set() { // This method better be private
     top.console.log("Overrider _set method of SuperInterval fired. Will now set the interval");
-    this.intervalID = setInterval(() => {
+    this.intervalID = setInterval(() => { top.console.log("TICK HAPPENED and before callback this.intervalID = " + this.intervalID);
       this.callback(); // Execute the callback function
       this.startTime = Date.now(); // Take note when the interval REstarted i.e. TICKED
+       top.console.log("TICK HAPPENED and after callback this.intervalID = " + this.intervalID);
     }, this.delay);
 
     this.startTime = Date.now(); // Take note when the interval first started
@@ -202,7 +203,7 @@ class SuperInterval extends SuperTimeout {
   }
 
   // super magic
-  _reset() {
+  _reset() { top.console.log("Overrider reset fired!");
     super._reset(); // Perform the same resetting procedure in SuperTimeout
     if (this.intervalID) { // With the addition of the task of removing the interval
       clearInterval(this.intervalID);
