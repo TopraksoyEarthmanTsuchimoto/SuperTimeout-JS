@@ -164,12 +164,12 @@ class SuperInterval extends SuperTimeout {
   }
 
   // Pause if it is OK to pause
-  pause() {
-    if (this.isPaused || !this.intervalID) {
+  pause() { top.console.log("Overridden pause method of SuperInterval fired");
+    if (this.isPaused || !this.intervalID) { top.console.log("Cannot pause because this.isPaused = " + this.isPaused + " and " + " !this.intervalID = " + (!this.intervalID));
       return; // Do nothing if is already paused or is reset
     }
     if (this.timeoutID) { clearTimeout(this.timeoutID); } // In case was paused and unpaused
-    if (this.intervalID) { clearInterval(this.intervalID); } // In case has never been paused before
+    if (this.intervalID) { clearInterval(this.intervalID); top.console.log("interval is cleared"); } // In case has never been paused before
 
     const elapsedTime = Date.now() - this.startTime; // Calculate how much time has passed since start (t=0) or the last TICK
     this.remainingTime -= elapsedTime;
