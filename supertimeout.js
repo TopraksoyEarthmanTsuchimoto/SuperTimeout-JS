@@ -17,6 +17,7 @@ class SuperTimeout {
     this.callback = callback; // Callback function to execute when timeout completes
     this.delay = delay; // Delay duration for the timeout
     this.timeoutID = null; // So that we can refer to the timeout. NOTE THAT this will immediately be overwritten by start()
+    this.intervalID = null; // EVEN THOUGH: This is never used inside SuperTimeout it has to exist here to be able to get used by SuperInterval down below
     this.startTime = null; // So that we will take note when the timeout started. NOTE THAT this will immediately be overwritten by start()
     this.remainingTime = delay; // Remaining time for the timeout to complete
     this.isPaused = false; // Flag to track if timeout is already paused
@@ -71,7 +72,7 @@ class SuperTimeout {
   }
 
   // Reset the timeout
-  _reset() {
+  _reset() { top.console.log("_reset() fired in parent");
     if (this.timeoutID) {
       clearTimeout(this.timeoutID);
       this.timeoutID = null; // Indicates that the timer has completed or is reset
@@ -104,7 +105,7 @@ class SuperTimeout {
   }
 
   // Restart the timeout
-  restart() {
+  restart() { top.console.log("restarting...");
     this._reset();
     this._start();
 
@@ -124,7 +125,7 @@ class SuperTimeout {
     }
   }
 
-  clear() {
+  clear() { top.console.log("clearing...");
   	this._reset();
     this._getLost();
   }
@@ -136,9 +137,12 @@ class SuperTimeout {
 class SuperInterval extends SuperTimeout {
   // NOTE: Had we not added anything to the constructor, we could omit it » https://javascript.info/class-inheritance#overriding-constructor
   constructor(callback, delay) {
+    // this.intervalID = null; // OH MY GOODNESS: This line causes error if it comes before super() and it causes another error if it comes after super()
+    // What happens if it comes before super() » https://javascript.info/class-inheritance#overriding-constructor
+    // What happens if it comes after super() » It missets the value of this.intervalID to null right after it is given a value like 1,2,3 inside the overrider _set() below
+    // Solution: Relocate it to the parent even if it is never used there! REMEMBER: It must execute before the _start() method in parent, NOT AFTER!
     super(callback, delay); // Note that: This would invoke the parent _start() if the local _start() didn't exist
     // Note that enlisting in listOfAllTickingSuperTimers is done via parent constructor using super() as soon as a new SuperInterval is created
-    this.intervalID = null;
   }
 
   // OVERRIDE THE PARENT: Check if it is OK to start and call set() if it is
