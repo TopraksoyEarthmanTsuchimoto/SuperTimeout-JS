@@ -60,7 +60,7 @@ function myResumeFunction() {
     else {display0.innerHTML = "All " + listOfAllTickingSuperTimers.length + " timeouts are unpaused";}
 }
 function myClearFunction() {
-	if(!markedTimeout.remainingTime != 0){
+	if(markedTimeout.remainingTime != 0){
     	markedTimeout.clear();
     	display0.innerHTML = "Timer #3 will never fire";
     }
