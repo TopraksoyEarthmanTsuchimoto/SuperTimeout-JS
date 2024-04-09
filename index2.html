@@ -10,14 +10,14 @@
 <button onclick="myPauseFunction()">PAUSE</button>
 <button onclick="myResumeFunction()">RESUME</button>
 
-<p id="demo1">Will fire every 4.1s</p>
-<p id="demo2">Will fire every 4.2s</p>
-<p id="demo3">Will fire every 4.3s</p>
+<p id="demo1">This interval will fire every 4.1s</p>
+<p id="demo2">This interval will fire every 4.2s</p>
+<p id="demo3">This interval will fire every 4.3s</p>
 
 <br><br>
-<button onclick="myClearFunction()">CLEAR/STOP Timer #3</button>
+<button onclick="myClearFunction()">STOP Timer #3</button>
 <br><br>
-<button onclick="myRestartFunction()">RESTART/CONTINUE Timer #3</button>
+<button onclick="myRestartFunction()">RESTART Timer #3</button>
 
 <script>
 
@@ -52,11 +52,12 @@ function myResumeFunction() {
 }
 function myClearFunction() {
 	timerThree.clear();
-	display0.innerHTML = "Timer #3 won't tick anymore";
+	display0.innerHTML = "Timer #3 stopped ticking";
 }
 function myRestartFunction() {
 	timerThree.restart();
 	display0.innerHTML = "Timer #3 has started ticking";
+	display3.innerHTML = "Timer 3 - lap »»» " + 0; c = 1;
 }
 
 
