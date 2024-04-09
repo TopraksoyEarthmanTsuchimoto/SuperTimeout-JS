@@ -166,20 +166,24 @@ class SuperInterval extends SuperTimeout {
     top.console.log("And now this.intervalID = " + this.intervalID);
   }
 
-  // Pause if it is OK to pause
+  // OVERRIDE THE PARENT: Pause if it is OK to pause
   pause() { top.console.log("Overrider pause method of SuperInterval fired. " + "Now this.intervalID = " + this.intervalID);
     if (this.isPaused || !this.intervalID) { top.console.log("Cannot pause because this.isPaused = " + this.isPaused + " OR " + " !this.intervalID = " + (!this.intervalID));
       return; // Do nothing if is already paused or is reset
     }
-    if (this.timeoutID) { clearTimeout(this.timeoutID); } // In case was paused and unpaused
-    if (this.intervalID) { clearInterval(this.intervalID); top.console.log("interval is cleared"); } // In case has never been paused before
+    if (this.timeoutID) {
+      top.console.log("This must be at least the 2nd pause. Before clearing the timeout: this.timeoutID = " + this.timeoutID);
+      clearTimeout(this.timeoutID);
+      top.console.log("After clearing the timeout: this.timeoutID = " + this.timeoutID);
+    } // In case was paused and unpaused
+    if (this.intervalID) { clearInterval(this.intervalID); top.console.log("interval is cleared and now this.intervalID = " + this.intervalID); } // In case has never been paused before
 
     const elapsedTime = Date.now() - this.startTime; // Calculate how much time has passed since start (t=0) or the last TICK
     this.remainingTime -= elapsedTime;
     this.isPaused = true;
   }
 
-  // Unpause if was paused
+  // OVERRIDE THE PARENT: Unpause if was paused
   resume() {
     if (!this.isPaused || !this.intervalID) {
       return; // Do nothing if is not paused or is reset
