@@ -185,19 +185,20 @@ class SuperInterval extends SuperTimeout {
     if (this.intervalID) { clearInterval(this.intervalID); top.console.log("interval is cleared and now this.intervalID = " + this.intervalID); } // In case has never been paused before
 
     const elapsedTime = Date.now() - this.startTime; // Calculate how much time has passed since start (t=0) or the last TICK
-    this.remainingTime -= elapsedTime;
+    this.remainingTime -= elapsedTime; top.console.log("When paused remaining time was = " + this.remainingTime);
     this.isPaused = true;
   }
 
   // OVERRIDE THE PARENT: Unpause if was paused
   resume() { top.console.log("Overrider resume() fired!");
-    if (!this.isPaused || !this.intervalID) {
+    if (!this.isPaused || !this.intervalID) { top.console.log("Cannot resume");
       return; // Do nothing if is not paused or is reset
     }
 
     this.timeoutID = setTimeout(function () {
-      this.timeoutID = null;
       this.callback();
+      this.timeoutID = null;
+
       this._set();
       this.remainingTime = this.delay;
     }, this.remainingTime);
