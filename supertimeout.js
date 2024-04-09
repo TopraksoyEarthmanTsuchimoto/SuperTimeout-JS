@@ -41,8 +41,8 @@ class SuperTimeout {
 
   // Check if it is OK to start and call set() if it is
   _start() { // This method better be private
-    if (this.timeoutID || this.startTime || this.remainingTime === 0) {
-      throw new Error("SuperTimeout is either already ticking or has completed"); // This should never show unless there is a bug in this js file as long as the start() method stays private
+    if (this.timeoutID || this.startTime || this.remainingTime === 0) { // Prevent creation of redundant timeouts
+      throw new Error("SuperTimeout is either already ticking or has completed"); // As long as the start() method stays private this should never show unless there is a bug in this js file
       // We don't need "return;" because we have "throw"
     }
 
