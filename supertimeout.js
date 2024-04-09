@@ -126,7 +126,7 @@ class SuperTimeout {
     }
   }
 
-  clear() { top.console.log("clearing...");
+  clear() { top.console.log("clearing... » fired by parent");
   	this._reset();
     this._getLost();
   }
@@ -160,15 +160,14 @@ class SuperInterval extends SuperTimeout {
   // OVERRIDE THE PARENT: Method to create a setInterval
   _set() { // This method better be private
     top.console.log("Overrider _set method of SuperInterval fired. Will now set the interval");
+    // CAUTION: Do not use classical function declarations inside setTimeouts and setIntervals when working with classes » It breaks the usage of the «this» keyword. Use arrow functions instead.
     this.intervalID = setInterval(() => { // DEBUG top.console.log("TICK HAPPENED and before callback this.intervalID = " + this.intervalID);
       this.callback(); // Execute the callback function
       this.startTime = Date.now(); // Take note when the interval REstarted i.e. TICKED
       // DEBUG top.console.log("TICK HAPPENED and after callback this.intervalID = " + this.intervalID);
     }, this.delay);
-
     this.startTime = Date.now(); // Take note when the interval first started
     this.isPaused = false;
-
     // DEBUG top.console.log("And now this.intervalID = " + this.intervalID);
   }
 
@@ -194,11 +193,10 @@ class SuperInterval extends SuperTimeout {
     if (!this.isPaused || !this.intervalID) { top.console.log("Cannot resume");
       return; // Do nothing if is not paused or is reset
     }
-
-    this.timeoutID = setTimeout(function () {
-      this.callback();
+    // CAUTION: Do not use classical function declarations inside setTimeouts and setIntervals when working with classes » It breaks the usage of the «this» keyword. Use arrow functions instead.
+    this.timeoutID = setTimeout(() => {
       this.timeoutID = null;
-
+      this.callback();
       this._set();
       this.remainingTime = this.delay;
     }, this.remainingTime);
