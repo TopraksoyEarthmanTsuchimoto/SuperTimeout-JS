@@ -167,7 +167,7 @@ class SuperInterval extends SuperTimeout {
   }
 
   // Pause if it is OK to pause
-  pause() { top.console.log("Overrider pause method of SuperInterval fired");
+  pause() { top.console.log("Overrider pause method of SuperInterval fired. " + "Now this.intervalID = " + this.intervalID);
     if (this.isPaused || !this.intervalID) { top.console.log("Cannot pause because this.isPaused = " + this.isPaused + " OR " + " !this.intervalID = " + (!this.intervalID));
       return; // Do nothing if is already paused or is reset
     }
