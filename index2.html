@@ -13,7 +13,7 @@
 <p id="demo1">This interval will fire every 4.1s</p>
 <p id="demo2">This interval will fire every 4.2s</p>
 <p id="demo3">This interval will fire every 4.3s</p>
-<h4 id="demo4"> </h4>
+<h4 id="demo4"> &nbsp </h4>
 
 <br>
 <button onclick="myClearFunction()">STOP Timer #3</button>
@@ -47,23 +47,23 @@ const timerThree = new SuperInterval(myFunction3, 4300);
 function myPauseFunction() {
     pauseAllSuperTimers();
     display0.innerHTML = "Now " + listOfAllTickingSuperTimers.length + " intervals are paused";
-    display4.innerHTML = "Remaining time for the next tick of timer #3 was " + timerThree.remainingTime + "ms";
+    if(timerThree.intervalID) {display4.innerHTML = "Remaining time for the next tick of timer #3 was " + timerThree.remainingTime + "ms";}
 }
 function myResumeFunction() {
     unpauseAllSuperTimers();
     display0.innerHTML = "Now " + listOfAllTickingSuperTimers.length + " intervals are unpaused";
-    display4.innerHTML = " ";
+    display4.innerHTML = " &nbsp ";
 }
 function myClearFunction() {
 	timerThree.clear();
 	display0.innerHTML = "Timer #3 stopped ticking";
-	display4.innerHTML = " ";
+	display4.innerHTML = " &nbsp ";
 }
 function myRestartFunction() {
 	timerThree.restart();
 	display0.innerHTML = "Timer #3 has started ticking";
 	display3.innerHTML = "Timer 3 - lap »»» " + 0; c = 1;
-	display4.innerHTML = " ";
+	display4.innerHTML = " &nbsp ";
 }
 
 
