@@ -39,6 +39,9 @@ As you can now pause the chain of all timeouts and all intervals easily to freez
 
 That is, of course, no matter how long the chain is.
 
+##### REMEMBER: SuperTimer functions will not pause or unpause the regular ECMAScript `setTimeout`s and `setInterval`s!
+##### SuperTimer functions can only pause and unpause `SuperTimeout`s and `SuperInterval`s!
+
 Note that if you want to control individual timers, you must assign them to variables with names like so
 ```
 const oneParticularTimer = new SuperTimeout(doSomething, 3000);
