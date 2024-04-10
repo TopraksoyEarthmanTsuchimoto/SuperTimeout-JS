@@ -11,18 +11,18 @@ With this javascript library you can replace them with `SuperTimeout`s and `Supe
 ## Usage
 Creating a SuperTimeout is very similar to creating a setTimeout. Just don't forget to start with the keyword « new ».
 ```
-new SuperTimeout(doSomething, 3000);
+new SuperTimeout(doSomething, 2000);
 ```
 Note the same resemblance between SuperInterval and setInterval.
 ```
-new SuperInterval(doSomething, 3000);
+new SuperInterval(doSomething, 2000);
 ```
 Especially useful in situations where you just have to keep adding to the chain of timeouts like,
 ```
 new SuperTimeout(doSomething, 3000);
 function doSomething() {
   console.log("First task complete!");
-  new SuperTimeout(doOneMoreThing, 5000);
+  new SuperTimeout(doOneMoreThing, 4000);
 }
 function doOneMoreThing() {
   console.log("Second task complete!");
