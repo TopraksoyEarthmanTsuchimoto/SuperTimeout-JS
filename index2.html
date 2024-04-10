@@ -10,15 +10,17 @@
 <button onclick="myPauseFunction()">PAUSE</button>
 <button onclick="myResumeFunction()">RESUME</button>
 
-<p id="demo1">This interval will fire every 4.1s</p>
-<p id="demo2">This interval will fire every 4.2s</p>
-<p id="demo3">This interval will fire every 4.3s</p>
+<p id="demo1">This interval will fire every 3.5s</p>
+<p id="demo2">This interval will fire every 3.6s</p>
+<p id="demo3">This interval will fire every 3.7s</p>
 <h4 id="demo4"> &nbsp </h4>
 
 <br>
 <button onclick="myClearFunction()">STOP Timer #3</button>
 <br><br>
 <button onclick="myRestartFunction()">RESTART Timer #3</button>
+<br><br>
+<h4><i>Not that refreshing the page will restart all the timers.<br>Refresh and keep experimenting with the buttons.</i></h4>
 
 <script>
 
@@ -40,9 +42,9 @@ function myFunction3() {
 
 
 // Create a new SuperInterval (automatically added to listOfAllTickingSuperTimers)
-new SuperInterval(myFunction1, 4100);
-new SuperInterval(myFunction2, 4200);
-const timerThree = new SuperInterval(myFunction3, 4300);
+new SuperInterval(myFunction1, 3500);
+new SuperInterval(myFunction2, 3600);
+const timerThree = new SuperInterval(myFunction3, 3700);
 
 function myPauseFunction() {
     pauseAllSuperTimers();
