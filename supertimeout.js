@@ -134,7 +134,7 @@ class SuperTimeout {
   	this._reset();
     this._getLost();
   }
-}
+} // END OF SuperTimeout class
 
 // STUDY EXTENDING AND OVERRIDING: https://javascript.info/class-inheritance#the-extends-keyword
 
@@ -223,9 +223,9 @@ class SuperInterval extends SuperTimeout {
   }
 
   // restart() _getLost() clear() will be identical so we don't override them
-}
+} // END OF SuperInterval class
 
-
+// ---
 // Call these functions to PAUSE-UNPAUSE ALL SuperTimeout and SuperInterval instances
 function pauseAllSuperTimers() {
     // Iterate through listOfAllTickingSuperTimers to pause all active SuperTimers
