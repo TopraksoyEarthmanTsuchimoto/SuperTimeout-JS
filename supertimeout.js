@@ -1,6 +1,6 @@
 // SuperTimeout and SuperInterval
 // version : 1.0
-// author  : Manheart Earthman a.k.a. B. A. Bilgekılınç Topraksoy a.k.a 土本 智一勇夫剛志
+// author  : Manheart Earthman a.k.a. B. A. Bilgekılınç Topraksoy a.k.a. 土本 智一勇夫剛志
 // license : Good People's License BY-SA
 // supertimeout.js was created during the development of https://speakworldlanguages.app
 
