@@ -4,7 +4,7 @@
     <script src="https://topraksoyearthmantsuchimoto.github.io/SuperTimeout-JS/supertimeout.js">/*Pausable timeouts and intervals*/</script>
   </head>
 <body>
-<h1 id="demo0">Pause resume timeout example (with linked js file)</h1>
+<h1 id="demo0">Pause and resume with SuperTimeout example</h1>
 
 
 <button onclick="myPauseFunction()">PAUSE</button>
@@ -69,6 +69,7 @@ function myClearFunction() {
 	else {display0.innerHTML = "Too late. Timer #3 already complete.";}
 }
 function myRestartFunction() {
+	display0.innerHTML = "Restarting timer #3 ...";
 	markedTimeout.restart();
 	display3.innerHTML = "« Timer 3 has restarted and is due to fire in 7000ms unless paused or cleared »";
 }
