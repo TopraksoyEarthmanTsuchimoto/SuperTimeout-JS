@@ -17,6 +17,8 @@
 <br><br>
 <button onclick="myClearFunction()">CLEAR Timer #3</button>
 <br><br>
+<button onclick="myRestartFunction()">RESTART Timer #3</button>
+<br><br>
 <h4><i>Not that refreshing the page will restart the timers.<br>Refresh and keep experimenting with the buttons.</i></h4>
 
 <script>
@@ -65,6 +67,10 @@ function myClearFunction() {
     	display0.innerHTML = "Timer #3 will never fire";
     }
 	else {display0.innerHTML = "Too late. Timer #3 already complete.";}
+}
+function myRestartFunction() {
+	markedTimeout.restart();
+	display3.innerHTML = "« Timer 3 has restarted and is due to fire in 7000ms unless paused or cleared »";
 }
 
 </script>
