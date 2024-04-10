@@ -17,7 +17,7 @@ Note the same resemblance between SuperInterval and setInterval.
 ```
 new SuperInterval(doSomething, 3000);
 ```
-If you just had to keep chaining the timeouts like,
+Especially useful in situations where you just have to keep adding to the chain of timeouts like,
 ```
 new SuperTimeout(doSomething, 3000);
 function doSomething() {
@@ -33,14 +33,14 @@ function doTheNextOtherThing() {
   // You get the idea...
 }
 ```
-You could pause the chain of all timeouts and all intervals easily and unpause as well by calling
+As you can now pause the chain of all timeouts and all intervals easily to freeze your app
 * `pauseAllSuperTimers()`
-and
+and unpause as well by calling
 * `unpauseAllSuperTimers()`
 
 That is, of course, no matter how long the chain is.
 
-If you want to control individual timers, you must assign them to variables with names like so
+Note that if you want to control individual timers, you must assign them to variables with names like so
 ```
 const oneParticularTimer = new SuperTimeout(doSomething, 3000);
 ```
@@ -50,8 +50,10 @@ or
 `oneParticularTimer.resume();`
 or
 `oneParticularTimer.clear();`
+or
+`oneParticularTimer.restart();`
 
-See the [source code](https://github.com/TopraksoyEarthmanTsuchimoto/SuperTimeout-JS/blob/main/supertimeout.js) for all available methods.
+See the [source code](https://github.com/TopraksoyEarthmanTsuchimoto/SuperTimeout-JS/blob/main/supertimeout.js) .
 #### About clearing timeouts and intervals
 The `.clear()` method works both with `SuperTimeout` and `SuperInterval` timers.
 What you must be careful about is,
