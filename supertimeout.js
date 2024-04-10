@@ -12,11 +12,16 @@ var listOfAllTickingSuperTimers = [];
 // SuperTimeout class
 class SuperTimeout {
   constructor(callback, delay) {
-    if (delay <= 0) {
-      throw new Error("SuperTimer delay time must be greater than 0");
-    }
     if (typeof callback !== 'function') {
       throw new Error("SuperTimer needs a valid callback function");
+    }
+    if (typeof delay !== 'number') {
+      throw new Error("SuperTimer delay must be a number");
+    }
+    if (delay <= 0) {
+      throw new Error("SuperTimer delay time must be greater than 0");
+    } else {
+      delay = Math.ceil(delay); // In case of decimal numbers round them up to the nearest integer
     }
 
     this.callback = callback; // Callback function to execute when timeout completes
