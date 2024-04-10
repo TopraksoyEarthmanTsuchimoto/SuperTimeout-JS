@@ -65,4 +65,5 @@ Either get `supertimeout.js` and include it in your HTML like,
 or use a CDN like,
 
 https://cdn.jsdelivr.net/gh/TopraksoyEarthmanTsuchimoto/SuperTimeout-JS@main/supertimeout.js
-
+## Developers
+You may create a fork of this repository.
