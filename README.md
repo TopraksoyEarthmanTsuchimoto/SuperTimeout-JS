@@ -33,9 +33,8 @@ function doTheNextOtherThing() {
   // You get the idea...
 }
 ```
-As you can now pause the chain of all timeouts and all intervals easily to freeze your app
+As you can now pause the chain of all timeouts and all intervals easily to freeze your app and unpause as well by calling
 * `pauseAllSuperTimers()`
-and unpause as well by calling
 * `unpauseAllSuperTimers()`
 
 That is, of course, no matter how long the chain is.
