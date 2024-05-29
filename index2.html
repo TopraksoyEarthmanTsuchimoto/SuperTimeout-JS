@@ -50,7 +50,7 @@ const timerThree = new SuperInterval(myFunction3, 3700);
 function myPauseFunction() {
     pauseAllSuperTimers();
     display0.innerHTML = "Now " + listOfAllTickingSuperTimers.length + " intervals are paused";
-    if(timerThree.intervalID) {display4.innerHTML = "Remaining time for the next tick of timer #3 was " + timerThree.remainingTime + "ms";}
+    if(timerThree.intervalID) {display4.innerHTML = "At the moment of button click, the remaining time for the next tick of timer #3 was " + timerThree.remainingTime + "ms";}
 }
 function myResumeFunction() {
     unpauseAllSuperTimers();
