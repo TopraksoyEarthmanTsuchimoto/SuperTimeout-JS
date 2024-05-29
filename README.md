@@ -71,3 +71,5 @@ or use a CDN like,
 https://cdn.jsdelivr.net/gh/TopraksoyEarthmanTsuchimoto/SuperTimeout-JS@main/supertimeout.js
 ## Developers
 You may create a fork of this repository.
+## History
+__supertimeout.js__ has been created during the development of [THE SPEAKWORLDLANGUAGES WEB APP](https://speakworldlanguages.github.io/)
