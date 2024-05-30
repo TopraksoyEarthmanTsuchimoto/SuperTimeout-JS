@@ -54,12 +54,14 @@ or
 `oneParticularTimer.clear();`
 or
 `oneParticularTimer.restart();`
+## Methods
+`pause()`, `resume()`, `clear()` and `restart()` methods can be used both on a SuperTimeout and a SuperInterval.
+## Properties
+`remainingTime` property can be used both on a SuperTimeout and a SuperInterval to get the remaining number of milliseconds at the moment of pausing. Example: `oneParticularTimer.remainingTime`
 
 See the [source code](https://github.com/TopraksoyEarthmanTsuchimoto/SuperTimeout-JS/blob/main/supertimeout.js) .
 ## Warning
-##### About clearing timeouts and intervals
-The `.clear()` method works both with `SuperTimeout` and `SuperInterval` timers.
-What you must be careful about is,
+When clearing `SuperTimeout` and `SuperInterval` timers using the `.clear()` what you must be careful about is,
 * `clearTimeout(myTimeout)` and `clearInterval(myInterval)` _do not throw any errors_ if `myTimeout` or `myInterval` is `undefined`,
 * `myTimeout.clear()` or `myInterval.clear()` _will throw an error_ if `myTimeout` or `myInterval` is `undefined`.
 ## Installation
@@ -71,6 +73,6 @@ or use a CDN like,
 
 https://cdn.jsdelivr.net/gh/TopraksoyEarthmanTsuchimoto/SuperTimeout-JS@main/supertimeout.js
 ## Developers
-You may create a fork of this repository.
+You may create a fork of this repository under the terms stated in the license.
 ## History
 __supertimeout.js__ has been created during the development of [THE SPEAKWORLDLANGUAGES WEB APP](https://speakworldlanguages.github.io/)
