@@ -33,7 +33,7 @@ function doTheNextOtherThing() {
   // You get the idea...
 }
 ```
-As you can now pause the chain of all timeouts and all intervals easily to freeze your app and unpause as well by calling
+As you can now pause the chain of all timeouts and all intervals easily and unpause as well by calling
 * `pauseAllSuperTimers()`
 * `unpauseAllSuperTimers()`
 
@@ -64,6 +64,9 @@ See the [source code](https://github.com/TopraksoyEarthmanTsuchimoto/SuperTimeou
 When clearing `SuperTimeout` and `SuperInterval` timers using `.clear()` what you must be careful about is,
 * `clearTimeout(myTimeout)` and `clearInterval(myInterval)` _do not throw any errors_ if `myTimeout` or `myInterval` is `undefined`,
 * `myTimeout.clear()` or `myInterval.clear()` _will throw an error_ if `myTimeout` or `myInterval` is `undefined`.
+
+In order to simulate a perfect app-freeze and app-unfreeze you must get all the playing audio and video and pause them too along with your super timers.
+Note that CSS animations can also be paused by changing their `.style.animationPlayState` from `running` to `paused`.
 ## Installation
 Either get `supertimeout.js` and include it in your HTML like,
 ```
