@@ -1,8 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SuperTimeout</title>
+    <title>SuperTimeout | LIVE EXAMPLE</title>
+    <meta name="description" content="Test the pausable version of setTimeout()">
+    <meta name="author" content="Manheart Earthman">
     <script src="https://topraksoyearthmantsuchimoto.github.io/SuperTimeout-JS/supertimeout.js">/*Pausable timeouts and intervals*/</script>
+    <style>
+      .progressBar{
+        width:50vw;
+        height: 1vmin;
+        animation-fill-mode: forwards; animation-timing-function: linear;
+        transform-origin: left;
+      }
+      .playAnimation{animation-name: barAnimation;}
+      #firstID{  background-color: CornflowerBlue; animation-duration: 5s;}
+      #secondID{ background-color: MediumSeaGreen; animation-duration: 6s;}
+      #thirdID{  background-color: Tomato;         animation-duration: 7s;}
+      @keyframes barAnimation {
+        0%{transform: scaleX(1);}
+        100%{transform: scaleX(0);}
+      }
+    </style>
   </head>
 <body>
 <h1 id="demo0">Pause and resume with SuperTimeout example</h1>
@@ -12,8 +30,11 @@
 <button onclick="myResumeFunction()">RESUME</button>
 
 <p id="demo1">This will fire in 5 seconds if not paused</p>
+<div class="progressBar playAnimation" id="firstID"></div>
 <p id="demo2">This will fire in 6 seconds if not paused</p>
+<div class="progressBar playAnimation" id="secondID"></div>
 <p id="demo3">This will fire in 7 seconds if not paused or cleared</p>
+<div class="progressBar playAnimation" id="thirdID"></div>
 
 <br><br>
 <button onclick="myClearFunction()">CLEAR Timer #3</button>
@@ -23,12 +44,15 @@
 <h4><i>Note that refreshing the page will restart the timers.<br>Refresh and keep experimenting with the buttons.</i></h4>
 
 <script>
-  
+
 const display0 = document.getElementById("demo0");
 // var a = 1; var b = 1; var c = 1;
 const display1 = document.getElementById("demo1");
 const display2 = document.getElementById("demo2");
 const display3 = document.getElementById("demo3");
+const bar1 = document.getElementById("firstID");
+const bar2 = document.getElementById("secondID");
+const bar3 = document.getElementById("thirdID");
 function myFunction1() {
   display1.innerHTML = "« Timer 1 is complete »";
 }
@@ -54,6 +78,9 @@ function myPauseFunction() {
     if(listOfAllTickingSuperTimers.length == 0) {display0.innerHTML = "No timeouts to be paused";}
     else if(listOfAllTickingSuperTimers.length == 1){display0.innerHTML = "There is " + listOfAllTickingSuperTimers.length + " timeout that is now paused";}
     else {display0.innerHTML = "All " + listOfAllTickingSuperTimers.length + " timeouts are paused";}
+    bar1.style.animationPlayState = "paused";
+    bar2.style.animationPlayState = "paused";
+    bar3.style.animationPlayState = "paused";
 }
 function myResumeFunction() {
     // Iterates through listOfAllTickingSuperTimers to unpause all SuperTimers
@@ -61,17 +88,30 @@ function myResumeFunction() {
     if(listOfAllTickingSuperTimers.length == 0) {display0.innerHTML = "No timeouts to be unpaused";}
     else if(listOfAllTickingSuperTimers.length == 1){display0.innerHTML = "There is " + listOfAllTickingSuperTimers.length + " timeout that is now unpaused";}
     else {display0.innerHTML = "All " + listOfAllTickingSuperTimers.length + " timeouts are unpaused";}
+    bar1.style.animationPlayState = "running";
+    bar2.style.animationPlayState = "running";
+    bar3.style.animationPlayState = "running";
 }
 function myClearFunction() {
 	if(markedTimeout.remainingTime != 0){
     	markedTimeout.clear();
     	display0.innerHTML = "Timer #3 will not fire";
+      bar3.classList.remove("playAnimation");
+      bar3.style.opacity = "0.1";
+      display3.innerHTML = "« Timer 3 has been cleared »";
     }
 	else {display0.innerHTML = "Too late. Timer #3 already complete.";}
 }
 function myRestartFunction() {
 	display0.innerHTML = "Restarting timer #3 ...";
-	markedTimeout.restart();
+  bar3.classList.remove("playAnimation");
+  bar3.style.opacity = "0.1";
+  requestAnimationFrame(()=>{requestAnimationFrame(goGoGo);});
+  function goGoGo() {
+    markedTimeout.restart();
+    bar3.style.opacity = "1";
+    bar3.classList.add("playAnimation"); bar3.style.animationPlayState = "running";
+  }
 	display3.innerHTML = "« Timer 3 has restarted and is due to fire in 7000ms unless paused or cleared »";
 }
 
