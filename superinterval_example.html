@@ -1,8 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SuperInterval</title>
+    <title>SuperInterval | LIVE EXAMPLE</title>
+    <meta name="description" content="Test the pausable version of setInterval()">
+    <meta name="author" content="Manheart Earthman">
+
     <script src="https://topraksoyearthmantsuchimoto.github.io/SuperTimeout-JS/supertimeout.js">/*Pausable timeouts and intervals*/</script>
+
+    <style>
+      .progressBar{
+        width:50vw;
+        height: 1vmin;
+        animation-fill-mode: forwards; animation-timing-function: linear; animation-iteration-count: infinite;
+        transform-origin: left;
+      }
+      .playAnimation{animation-name: barAnimation;}
+      #firstID{  background-color: SteelBlue; animation-duration: 3.5s;}
+      #secondID{ background-color: GoldenRod; animation-duration: 3.6s;}
+      #thirdID{  background-color: IndianRed; animation-duration: 3.7s;}
+      @keyframes barAnimation {
+        0%{transform: scaleX(1);}
+        100%{transform: scaleX(0);}
+      }
+    </style>
   </head>
 <body>
 <h1 id="demo0">Pause and resume with SuperInterval example</h1>
@@ -12,8 +32,11 @@
 <button onclick="myResumeFunction()">RESUME</button>
 
 <p id="demo1">This interval will fire every 3.5 seconds</p>
+<div class="progressBar playAnimation" id="firstID"></div>
 <p id="demo2">This interval will fire every 3.6 seconds</p>
+<div class="progressBar playAnimation" id="secondID"></div>
 <p id="demo3">This interval will fire every 3.7 seconds</p>
+<div class="progressBar playAnimation" id="thirdID"></div>
 <h4 id="demo4"> &nbsp </h4>
 
 <br>
@@ -22,6 +45,8 @@
 <button onclick="myRestartFunction()">RESTART Timer #3</button>
 <br><br>
 <h4><i>Note that refreshing the page will restart all the timers.<br>Refresh and keep experimenting with the buttons.</i></h4>
+<br><br>
+<a href="https://github.com/TopraksoyEarthmanTsuchimoto/SuperTimeout-JS">Get SuperTimeout-JS</a>
 
 <script>
 
@@ -31,6 +56,9 @@ const display1 = document.getElementById("demo1");
 const display2 = document.getElementById("demo2");
 const display3 = document.getElementById("demo3");
 const display4 = document.getElementById("demo4");
+const bar1 = document.getElementById("firstID");
+const bar2 = document.getElementById("secondID");
+const bar3 = document.getElementById("thirdID");
 function myFunction1() {
   display1.innerHTML = "Timer 1 - lap »»» " + a; a++;
 }
@@ -51,27 +79,42 @@ function myPauseFunction() {
     pauseAllSuperTimers();
     display0.innerHTML = "Now " + listOfAllTickingSuperTimers.length + " intervals are paused";
     if(timerThree.intervalID) {display4.innerHTML = "At the moment of button click, the remaining time for the next tick of timer #3 was " + timerThree.remainingTime + "ms";}
+    bar1.style.animationPlayState = "paused";
+    bar2.style.animationPlayState = "paused";
+    bar3.style.animationPlayState = "paused";
 }
 function myResumeFunction() {
     unpauseAllSuperTimers();
     display0.innerHTML = "Now " + listOfAllTickingSuperTimers.length + " intervals are unpaused";
     display4.innerHTML = " &nbsp ";
+    bar1.style.animationPlayState = "running";
+    bar2.style.animationPlayState = "running";
+    bar3.style.animationPlayState = "running";
 }
 function myClearFunction() {
 	timerThree.clear();
 	display0.innerHTML = "Timer #3 stopped ticking";
 	display4.innerHTML = " &nbsp ";
+  bar3.classList.remove("playAnimation");
+  bar3.style.opacity = "0.1";
 }
 function myRestartFunction() {
-	timerThree.restart();
 	display0.innerHTML = "Timer #3 has started ticking";
 	display3.innerHTML = "Timer 3 - lap »»» " + 0; c = 1;
 	display4.innerHTML = " &nbsp ";
+  bar3.classList.remove("playAnimation");
+  bar3.style.opacity = "0.1";
+  requestAnimationFrame(()=>{requestAnimationFrame(goGoGo);});
+  function goGoGo() {
+    timerThree.restart();
+    bar3.style.opacity = "1";
+    bar3.classList.add("playAnimation"); bar3.style.animationPlayState = "running";
+  }
 }
 
 
 </script>
-	
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XQE4T0J6QM"></script>
 <script>
@@ -81,6 +124,6 @@ function myRestartFunction() {
 
   gtag('config', 'G-XQE4T0J6QM');
 </script>
-	
+
 </body>
 </html>
